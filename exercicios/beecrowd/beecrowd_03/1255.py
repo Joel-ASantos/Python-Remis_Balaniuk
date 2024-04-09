@@ -14,8 +14,6 @@
 
 def letrasRepetidas(texto):
     freq = {}
-    for char in texto:
-        if char.isalpha():
     
 case_test = int(input())
 for i in range(case_test):
