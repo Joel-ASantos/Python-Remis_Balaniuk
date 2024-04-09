@@ -12,11 +12,21 @@
 #Para cada caso de teste, imprima uma linha contendo a(s) letra(s) que mais ocorreu(ocorreram) no texto em minúsculas
 # (se houver empate, imprima as letras em ordem alfabética).
 
-def letrasRepetidas(texto):
+def letras_freq(texto):
     freq = {}
-    
-case_test = int(input())
-for i in range(case_test):
+    for char in texto:
+        if char in freq:
+            if char.isalpha():
+                freq[char] += 1
+        else:
+            freq[char] = 1
+    maxOcorr = max(freq.values())
+    letras_maxOcorr = [letra for letra, freq in freq.items() if freq == maxOcorr]
+    letras_maxOcorr.sort()
+    return letras_maxOcorr
+            
+teste = int(input())
+for i in range(teste):
     texto = input().lower()
-    resul = letrasRepetidas(texto)
-    print(resul)
+    resul=letras_freq(texto)
+    print(''.join(resul))
