@@ -1,35 +1,37 @@
-def calcular_pontuacao(pontuacao_sistema, ordem_chegada):
-    pontuacao_total = [0] * len(ordem_chegada)
-    for i, posicao in enumerate(ordem_chegada):
-        if posicao <= len(pontuacao_sistema):  
-            pontuacao_total[i] = pontuacao_sistema[posicao - 1]
-        else:
-            pontuacao_total[i] = 0  
-    return pontuacao_total
-
-def encontrar_campeao(pontuacoes_totais):
-    max_pontuacao = max(pontuacoes_totais)
-    campeoes = [i + 1 for i, pontuacao in enumerate(pontuacoes_totais) if pontuacao == max_pontuacao]
-    return campeoes
-
 while True:
-    G, P = map(int, input().split())
-    if G == 0 and P == 0:
+    l1 = input().split()
+    G = int(l1[0])
+    P = int(l1[1])
+    
+    if G == 0:
         break
-
-    resultados = []
-    for _ in range(G):
-        resultados.append(list(map(int, input().split())))
-
+    
+    tabela = []
+    for i in range(G):
+        corrida = []
+        l2 = input().split()
+        for j in range(P):
+            corrida.append(int(l2[j]))
+        tabela.append(corrida)
+        
     S = int(input())
-    for _ in range(S):
-        K, *pontos = map(int, input().split())
-        pontuacao_sistema = pontos[:K]
-        pontuacoes_totais = [0] * P
-
-        for corrida in resultados:
-            pontuacoes_corrida = calcular_pontuacao(pontuacao_sistema, corrida)
-            pontuacoes_totais = [pontuacoes_totais[i] + pontuacoes_corrida[i] for i in range(P)]
-
-        campeoes = encontrar_campeao(pontuacoes_totais)
-        print(*campeoes)
+    for i in range(S):
+        l3 = input().split()
+        pos = int(l3[0])
+        pontos = []
+        for j in range(pos):
+            pontos.append(int(l3[j+1]))
+        pontospilostos = [0]*P
+        for c in tabela:
+            for j in range(P):
+                if c[j] <= pos:
+                    pontospilostos[j] += pontos[c[j]-1]
+        maxp = max(pontospilostos)
+        flag = False
+        for j in range(P):
+            if pontospilostos[j] == maxp:
+                if flag:
+                    print('',end='')
+                print(j+1)
+                flag = True
+        print('')
