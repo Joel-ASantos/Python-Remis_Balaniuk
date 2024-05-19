@@ -14,8 +14,8 @@ for index in lista:
     for char in index:
         if char.isupper():
             char = char.lower()
-            if char in dict_consoantes:
-                dict_consoantes[char] += 1
+        if char in dict_consoantes:
+            dict_consoantes[char] += 1
 
 with open('textoSaida.txt','w') as f:
     f.write('{}'.format(dict_consoantes))

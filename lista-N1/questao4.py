@@ -15,7 +15,6 @@ def fibonacci(y):
 
 n = int(input('digite o n da fibonacci: '))
 sequencia = fibonacci(n)
-print(sequencia)
 
 # soma da diagonal
 diagonal = 0
@@ -23,8 +22,6 @@ for i in range(len(sequencia)):
     for j in range(len(sequencia)):
         if i == j:
             diagonal += sequencia[i][j]
-print('\n')
-print(diagonal)
 
 #adicionando os multiplos de 5
 mult = []
@@ -32,8 +29,6 @@ for i in range(len(sequencia)):
     for j in range(len(sequencia)):
         if sequencia[i][j] % 5 == 0:
             mult.append(sequencia[i][j])
-print('\n')
-print(mult)
 
 # primeira linha transposta
 fibonacci_transposta = sequencia.T
@@ -42,14 +37,16 @@ for i in range(len(fibonacci_transposta)):
     for j in range(len(fibonacci_transposta)):
         if i == 0:
             linha_transposta.append(fibonacci_transposta[i][j])
-print("\n")
-print(linha_transposta)
+
 
 # A linha com maior múltiplo de 3
-cont = 0
-for i in range(len(sequencia)):
-    for j in range(len(sequencia)):
-        if sequencia[i][j] % 3 == 0:
-            cont += 1
-            
-# NÃO ESQUECER DE FAZER A SAIDA.TXT
+filtro = sequencia % 3 == 0
+mult3 = np.sum(filtro,axis=1)
+big_mult3 = np.argmax(mult3)
+
+with open('fiboSaida.txt','w') as f:
+    f.write('Soma da diagonal: {}\n'.format(diagonal))
+    f.write('A matriz que contem 5 multiplos de 5: {}\n'.format(mult))
+    f.write('A primeira linha da sua transposta e: {}\n'.format(linha_transposta))
+    f.write('A linha com maior múltiplo de 3 e {}, a soma e {}'.format(big_mult3,mult3))
+    f.close()
